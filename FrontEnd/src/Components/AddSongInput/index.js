@@ -3,11 +3,11 @@ import usePost from '../../hooks/usePost';
 import './AddSongInput.css';
 
 const initialData = {
-	Title          : 'bob',
-	Artist         : 'bob',
-	SongLengthCode : 'bob',
-	Link           : 'bob',
-	SuggestedBy    : 'bob',
+	Title          : 'blank',
+	Artist         : 'blank',
+	SongLengthCode : 'blank',
+	Link           : 'blank',
+	SuggestedBy    : 'blank',
 };
 
 function AddSongInput() {
@@ -19,11 +19,6 @@ function AddSongInput() {
 		const newValue = event.target.value;
 		setData({ ...data, [key]: newValue });
 	}
-
-
-
-	// let selectStyle = {
-	//   height: '26px',};
 
 	return (
 		<form id='form' className='add-song-form' action='submit'>
@@ -74,6 +69,7 @@ function AddSongInput() {
 				onClick={(event) => {
 					event.preventDefault();
 					makePost(data);
+
 					document.querySelector('.add-song-form').reset();
 				}}
 			>
