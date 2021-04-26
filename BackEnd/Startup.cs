@@ -28,39 +28,23 @@ namespace BackEnd
         {
             services.AddTransient<IRepository<Song>, SongRepository>();
             services.AddTransient<IRepository<MoQuote>, QuoteRepository>();
-            services.AddControllers();
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(
-                builder =>
-                {
-                    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                });
+                    builder =>
+                    {
+                        builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+                    });
             });
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            //     app.UseSwagger();
-            //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BackEnd v1"));
-            // }
-
-            //app.UseHttpsRedirection();
-
-            //this fixed Nathan's fetch errors.
             app.UseRouting();
-            app.UseCors(builder => builder
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader());
-
-
-            //app.UseAuthorization();
-
+            app.UseCors();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
