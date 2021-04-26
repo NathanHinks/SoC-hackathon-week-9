@@ -30,10 +30,14 @@ function App() {
 					alt='woman squatting'
 				/>
 			</header>
-
+		{appData && (
+			<>
 			<SquatInput onClick={setDataState} />
 			<QuoteDisplay data={appData.quoteData} />
 			<SongList className='list-com' data={appData.songData} />
+			</>
+			)
+		}
 
 			<footer>
 					<img
