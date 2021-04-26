@@ -12,7 +12,7 @@ const initialData = {
 
 function AddSongInput() {
 	const [ data, setData ] = useState(initialData);
-	const [ postData, setPostData ] = useState(initialData);
+	const makePost= usePost();
 
 	function UpdateData(event) {
 		const key = event.target.id;
@@ -20,8 +20,7 @@ function AddSongInput() {
 		setData({ ...data, [key]: newValue });
 	}
 
-	// post songs from here using usePost custom hooks.
-	usePost(postData);
+
 
 	// let selectStyle = {
 	//   height: '26px',};
@@ -74,7 +73,7 @@ function AddSongInput() {
 				className='add-song-btn'
 				onClick={(event) => {
 					event.preventDefault();
-					setPostData(data);
+					makePost(data);
 					document.querySelector('.add-song-form').reset();
 				}}
 			>

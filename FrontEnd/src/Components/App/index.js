@@ -4,6 +4,8 @@ import AddSongInput from '../AddSongInput';
 import QuoteDisplay from '../QuoteDisplay';
 import SongList from '../SongList';
 import SquatInput from '../SquatInput';
+import ReactPlayer from "react-player";
+
 import './App.css';
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
 			<>
 			<SquatInput onClick={setDataState} />
 			<QuoteDisplay data={appData.quoteData} />
+			<ReactPlayer className="song-video" url={appData.songData.link} width="400px" height="300px" />
 			<SongList className='list-com' data={appData.songData} />
 			</>
 			)
