@@ -1,15 +1,7 @@
 import { useState } from 'react';
 import usePost from '../../hooks/usePost';
-import { formInputs, songLengths } from '../../libs/dependencies';
+import { formInputs, initialData, songLengths } from '../../libs/dependencies';
 import './AddSongInput.css';
-
-const initialData = {
-  Title: 'blank',
-  Artist: 'blank',
-  SongLengthCode: 'blank',
-  Link: 'blank',
-  SuggestedBy: 'blank',
-};
 
 function AddSongInput() {
   const [data, setData] = useState(initialData);
@@ -24,7 +16,6 @@ function AddSongInput() {
 
   return (
     <form id='form' className='add-song-form' action='submit'>
-
       {formInputs.map((input) => <input {...input} onChange={UpdateData} />)}
 
       <select

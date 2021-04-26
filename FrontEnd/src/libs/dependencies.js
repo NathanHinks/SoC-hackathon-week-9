@@ -2,6 +2,14 @@ export const BACKEND_URL = 'https://supersquatsongapp.herokuapp.com';
 
 export const getSong = (songLengthState) => Math.max(songLengthState / 30, 1);
 
+export const initialData = {
+  Title: 'blank',
+  Artist: 'blank',
+  SongLengthCode: 'blank',
+  Link: 'blank',
+  SuggestedBy: 'blank',
+};
+
 export const formInputs = [
   {
     type: 'text',
