@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BACKEND_URL } from '../libs/dependencies';
 
 function usePost(newSong) {
   function makePost() {
@@ -9,7 +10,7 @@ function usePost(newSong) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newSong),
     };
-    fetch("http://localhost:5000/songs", requestOptions);
+    fetch(`${BACKEND_URL}/songs`, requestOptions);
   }
 
   useEffect(() => {
