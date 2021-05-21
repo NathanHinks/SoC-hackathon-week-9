@@ -63,7 +63,7 @@ h1 {
 }
 
 footer {
-	align-self: flex-end;
+	align-content: flex-end;
 	background: var(--white);
 	grid-area: footer;
 	padding: .5em;

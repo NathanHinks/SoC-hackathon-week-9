@@ -1,6 +1,9 @@
-import { useState } from 'react';
+
+import { useEffect } from 'react';
 import ReactPlayer from "react-player";
-import useFetch from '../../hooks/useFetch';
+import { useSelector } from "react-redux";
+import ClipLoader from "react-spinners/ClipLoader";
+import getSong from '../../utils/getSong';
 import Footer from '../Footer';
 import Header from '../Header';
 import QuoteDisplay from '../QuoteDisplay';
@@ -8,21 +11,23 @@ import SongList from '../SongList';
 import SquatInput from '../SquatInput';
 import './App.css';
 
+const App = () => {
+	const { numberOfSquats, isLoading }  = useSelector(state => state)
+	const { link: videoUrl } = useSelector(state => state.suggestedSong)
 
-function App() {
-	const [ dataState, setDataState ] = useState(0);
-
-	const appData = useFetch(dataState);
+	useEffect(() => getSong(numberOfSquats), [numberOfSquats])
 
 	return (
 		<div className='App'>
 			<Header />
-			{appData && 
+			{isLoading ?
+				<ClipLoader color="white" size={200} css="margin: auto; grid-column: 1/-1;"/>
+				:
 				<>
-					<SquatInput onClick={setDataState} />
-					<QuoteDisplay data={appData.quoteData} />
-					<ReactPlayer className="song-video" url={appData.songData.link} width="400px" height="300px" />
-					<SongList className='list-com' data={appData.songData} />
+					<SquatInput />
+					<QuoteDisplay />
+					<ReactPlayer className="song-video" url={videoUrl} width="400px" height="300px" />
+					<SongList />
 				</>
 		}
 			<Footer />

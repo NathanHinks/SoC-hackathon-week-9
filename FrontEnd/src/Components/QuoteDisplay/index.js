@@ -1,10 +1,12 @@
+import { useSelector } from "react-redux";
 import "./QuoteDisplay.css";
 
-function QuoteDisplay({ data }) {
+const QuoteDisplay = () => {
+  const {quote} = useSelector(state => state.suggestedSong)
   return (
     <div className="quote-display">
       <h2 className="quote-title">Motivational Quote:</h2>
-      <p className="quote">"{data.quote}"</p>
+      <p className="quote">"{quote}"</p>
     </div>
   );
 }

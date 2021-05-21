@@ -1,28 +1,40 @@
 import { useState } from 'react';
-import usePost from '../../hooks/usePost';
+import { useDispatch } from 'react-redux';
 import { formInputs, initialData, songLengths } from '../../libs/dependencies';
+import postSong from '../../utils/postSong';
+import { addNewSong } from '../../redux/actions';
 import './AddSongInput.css';
 
-function AddSongInput() {
-  const [data, setData] = useState(initialData);
-  const makePost = usePost();
+const AddSongInput = () => {
+  const [formData, setFormData] = useState(initialData);
+  
+  const updateFormData = (e) => {
+    const { id, value } = e.target;
 
-  function UpdateData(event) {
-    const key = event.target.id;
-    const newValue = event.target.value;
-
-    setData({ ...data, [key]: newValue });
+    setFormData({ ...formData, [id]: value });
   }
 
+  const dispatch = useDispatch();
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    document.querySelector('.add-song-form').reset();
+    
+    postSong(formData)
+    dispatch(addNewSong(formData))
+  }
+
+
   return (
-    <form id='form' className='add-song-form' action='submit'>
-      {formInputs.map((input) => <input {...input} onChange={UpdateData} />)}
+    <form id='form' className='add-song-form' action='submit' onSubmit={handleSubmit}>
+      
+      {formInputs.map((input, i) => <input { ...input } key={i}onChange={ updateFormData } required />) }
 
       <select
         form='form'
         type='text'
         id='SongLengthCode'
-        onChange={UpdateData}
+        onChange={updateFormData}
         required
       >
         {songLengths.map((length) => (
@@ -34,12 +46,7 @@ function AddSongInput() {
 
       <button
         className='add-song-btn'
-        onClick={(event) => {
-          event.preventDefault();
-          makePost(data);
-
-          document.querySelector('.add-song-form').reset();
-        }}
+        type='submit'
       >
         Add Song
       </button>

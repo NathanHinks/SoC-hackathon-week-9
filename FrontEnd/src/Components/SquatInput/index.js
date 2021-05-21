@@ -1,10 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setNumberOfSquats } from '../../redux/actions';
 import './SquatInput.css';
 
-//takes in function to send squats back up to app.
+const SquatInput = () => {
+	const dispatch = useDispatch();
+	const [ input, setInput ] = useState(0);
 
-function SquatInput({ onClick }) {
-	const [ input, setInput ] = useState(5);
+	const handleClick = (e) => {
+		e.preventDefault()
+		dispatch(setNumberOfSquats(input));
+	}
 
 	return (
 		<form className='squat-input-form'>
@@ -21,10 +27,7 @@ function SquatInput({ onClick }) {
 			<button
 				className='squat-input-btn'
 				type='submit'
-				onClick={(e) => {
-					e.preventDefault();
-					onClick(input);
-				}}
+				onClick={handleClick}
 			>
 				Get Songs
 			</button>
